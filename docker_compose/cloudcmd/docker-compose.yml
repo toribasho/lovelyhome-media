@@ -1,0 +1,15 @@
+version: '2.0'
+
+services:
+  cloudcmd:
+    ports:
+      - 881:8000
+    volumes:
+      - /root:/root
+      - /:/mnt/fs
+    image: coderaiser/cloudcmd
+    container_name: cloudcmd
+    #    environment:
+    #  - PUID=1000
+    #  - PGID=1000
+    restart: unless-stopped

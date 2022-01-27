@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1001
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /media/storage/system/conf/Plex:/config
+      - /media/storage/TV:/tv
+      - /media/storage/Movies:/movies
+    restart: unless-stopped

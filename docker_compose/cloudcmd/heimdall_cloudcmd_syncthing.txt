@@ -1,0 +1,42 @@
+version: '2.0'
+
+services:
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Moscow
+    volumes:
+      - /media/storage/system/docker/heimdall:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+  
+  cloudcmd:
+    ports:
+      - 881:8000
+    volumes:
+      - ~:/root
+      - /:/mnt/fs
+    image: coderaiser/cloudcmd
+    
+
+    
+  syncthing:
+    image: linuxserver/syncthing
+    container_name: syncthing
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Europe/Moscow
+    volumes:
+      - /media/storage/system/docker/syncthing:/config
+      - /media/storage/system/syncthing:/media/storage/system/syncthing
+    ports:
+      - 883:8384
+      - 22000:22000
+      - 21027:21027/udp
+    restart: unless-stopped

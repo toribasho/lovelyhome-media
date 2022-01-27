@@ -1,0 +1,16 @@
+version: '2.0'
+
+services:
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - "890:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /media/storage/system/docker/portainer/data:/data
+      - /media/storage/system/docker/shared:/shared
+    environment:
+      - TZ=Europe/Moscow

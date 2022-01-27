@@ -1,0 +1,23 @@
+version: "2.1"
+services:
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Moscow
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=smarthome #optional
+      - PASS=112233 #optional
+#      - WHITELIST=iplist #optional
+#      - HOST_WHITELIST=dnsnane list #optional
+    volumes:
+      - /media/storage/system/conf/transmission:/config
+      - /media/storage/Downloads/Movies:/downloads
+      - /media/storage/torrents:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
